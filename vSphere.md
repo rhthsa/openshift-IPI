@@ -13,7 +13,7 @@ Prepare below before deploy OpenShift Cluster
   - [vSphere infrastructure requirements](https://docs.openshift.com/container-platform/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-infrastructure_installing-vsphere-installer-provisioned)
   - [vCenter requirements](https://docs.openshift.com/container-platform/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned)
 - Global Administrative privileges account of vCenter
-  - Detail required access
+  - [Required vCenter account privileges](https://docs.openshift.com/container-platform/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned)
 - 856 GB space on Storage
 - 2 IP Addresses for API and Ingress
 - DNS records for two static IP addresses (API and Ingress IP Address)
