@@ -83,10 +83,13 @@ prepare the bastion node to install OpenShift Container Platform. This includes 
     
     ![log in console](images/Log_in_console.png)
 
-  - Navigate to OpenShift Menu->Create Cluster->Run it yourself->AWS (x86_64) on run it your self->Installer-provisioned-infrastructure
-  - Copy pull secret
+  - Navigate to OpenShift Menu->Cluster->Select tab Datacenter->vSphere ->Installer-provisioned-infrastructure
+
+    ![](images/vSphere.png)
+
+  - Copy pull secret and you can also download CLI from here.
     
-    ![click to copy pull secret](images/click_to_copy_pull_secret.png)
+    ![](images/vSphere-secret.png)
 
   - Save your pull secret for use later
 
