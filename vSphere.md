@@ -30,10 +30,10 @@ Prepare below before deploy OpenShift Cluster
 
 Default CPU , Memory and Disk sizing for Openshift node after finish deployment**
 
-| Node Type   | vCPU | Mem(GiB) | Storage (GB) | 
-|-------------|:------:|:----------:|:--------------:|
-| Master Node | 4    | 16       | 120          | 
-| Worker Node | 2    | 8        | 120          |
+| Node Type   | vCPU | Mem(GiB) | Storage (GB) | IOPS|
+|-------------|:------:|:----------:|:--------------:|:------:|
+|Control Plane | 4    | 16       | 100          | 300
+|Compute | 2    | 8        | 100          |300
 
 
 ## Preparation
