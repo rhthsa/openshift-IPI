@@ -8,7 +8,9 @@
 ## Prerequisites
 
 Prepare below before deploy OpenShift Cluster
-
+- Recommended vSphere version
+  - VM hardware version 15 or later
+  - vSphere version 6.7U3
 - Requires to access to port 443 to vCenter and all ESXi hosts
   - [vSphere infrastructure requirements](https://docs.openshift.com/container-platform/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-infrastructure_installing-vsphere-installer-provisioned)
   - [vCenter requirements](https://docs.openshift.com/container-platform/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned)
