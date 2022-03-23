@@ -84,7 +84,7 @@ prepare the bastion server to install OpenShift Container Platform. This include
     
     ![log in console](images/Log_in_console.png)
 
-  - Navigate to OpenShift Menu->Create Cluster->AWS (X86) on run it your self->Installer-provisioned-infrastructure
+  - Navigate to OpenShift Menu->Create Cluster->Run it yourself->AWS (x86_64) on run it your self->Installer-provisioned-infrastructure
   - Copy pull secret
     
     ![click to copy pull secret](images/click_to_copy_pull_secret.png)
