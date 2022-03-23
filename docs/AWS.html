@@ -226,34 +226,23 @@
 <th style="text-align:center">vCPU</th>
 <th style="text-align:center">Mem(GiB)</th>
 <th style="text-align:center">Storage (GB)</th>
-<th style="text-align:center">IOPs</th>
-<th>AWS Instance Size</th>
+<th style="text-align:center">IOPS</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Master Node</td>
+<td>Control Plane</td>
 <td style="text-align:center">4</td>
 <td style="text-align:center">16</td>
-<td style="text-align:center">120</td>
-<td style="text-align:center">3000</td>
-<td>m6i.xlarge / m5.xlarge</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">300</td>
 </tr>
 <tr>
-<td>Worker Node</td>
+<td>Compute</td>
 <td style="text-align:center">2</td>
 <td style="text-align:center">8</td>
-<td style="text-align:center">120</td>
-<td style="text-align:center">3000</td>
-<td>m6i.large / m5.large</td>
-</tr>
-<tr>
-<td>Helper Node</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">30</td>
 <td style="text-align:center">100</td>
-<td>t3a.medium</td>
+<td style="text-align:center">300 </td>
 </tr>
 </tbody>
 </table>
@@ -563,7 +552,7 @@ openshift-service-ca                     service-ca-f766bdf44-tss7t             
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AWS","level":"1.2.1","depth":2,"next":{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]},"previous":{"title":"OpenShift IPI","level":"1.2","depth":1,"ref":"","articles":[{"title":"AWS","level":"1.2.1","depth":2,"path":"AWS.md","ref":"AWS.md","articles":[]},{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","copy-code-button","mermaid-gb3"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mermaid-newface":{"theme":"neutral"},"search-plus":{},"copy-code-button":{},"mermaid-gb3":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Red Hat Thailand SA","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OpenShift IPI","gitbook":"3.2.3"},"file":{"path":"AWS.md","mtime":"2022-03-23T04:54:52.067Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-23T04:55:35.441Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AWS","level":"1.2.1","depth":2,"next":{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]},"previous":{"title":"OpenShift IPI","level":"1.2","depth":1,"ref":"","articles":[{"title":"AWS","level":"1.2.1","depth":2,"path":"AWS.md","ref":"AWS.md","articles":[]},{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","copy-code-button","mermaid-gb3"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mermaid-newface":{"theme":"neutral"},"search-plus":{},"copy-code-button":{},"mermaid-gb3":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Red Hat Thailand SA","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OpenShift IPI","gitbook":"3.2.3"},"file":{"path":"AWS.md","mtime":"2022-03-23T05:03:57.208Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-23T05:04:38.743Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
