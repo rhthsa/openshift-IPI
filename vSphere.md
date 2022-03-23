@@ -52,7 +52,8 @@ prepare the bastion node to install OpenShift Container Platform. This includes 
 - Switch to *root* using the *sudo* command
   
   ```bash
-  sudo -i  ```
+  sudo -i  
+  ```
 
 - Install OpenShift CLI Tools
   
