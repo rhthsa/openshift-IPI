@@ -20,11 +20,11 @@
 
 Default CPU , memory and Disk sizing for Openshift node after finish deployment
 
-| Node Type   | vCPU | Mem(GiB) | Storage (GB) | IOPs | AWS Instance Size      |
-|-------------|:------:|:----------:|:--------------:|:------:|------------------------|
-| Master Node | 4    | 16       | 120          | 3000 | m6i.xlarge / m5.xlarge |
-| Worker Node | 2    | 8        | 120          | 3000 | m6i.large / m5.large   |
-| Helper Node | 2    | 4        | 30           | 100  | t3a.medium             |
+| Node Type   | vCPU | Mem(GiB) | Storage (GB) | IOPS|
+|-------------|:------:|:----------:|:--------------:|:------:|
+|Control Plane | 4    | 16       | 100          | 300
+|Compute | 2    | 8        | 100          |300 
+
 
 
 ## Preparation
