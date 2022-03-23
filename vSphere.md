@@ -17,6 +17,7 @@ Prepare below before deploy OpenShift Cluster
 - 856 GB space on Storage
 - 2 IP Addresses for API and Ingress
 - DNS records for two static IP addresses (API and Ingress IP Address)
+- DHCP Server
 - vCenter root CA  to trust installation host with vCenter before deploy OpenShift
 - Pull secret from [https://cloud.redhat.com](https://cloud.redhat.com)
   - Evaluation subscription can be found at [try.openshift.com](https://try.openshift.com)
