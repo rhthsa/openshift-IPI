@@ -1,0 +1,605 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>AWS · OpenShift IPI</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Red Hat Thailand SA">
+        
+        
+    
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="vSphere.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    OpenShift IPI
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="AWS.html">
+            
+                <a href="AWS.html">
+            
+                    
+                    AWS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="vSphere.html">
+            
+                <a href="vSphere.html">
+            
+                    
+                    vSphere
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >AWS</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="installation-on-aws">Installation on AWS</h1>
+<ul>
+<li><a href="#installation-on-aws">Installation on AWS</a><ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#preparation">Preparation</a></li>
+<li><a href="#install-openshift">Install OpenShift</a></li>
+<li><a href="#openshift-architecture">OpenShift Architecture</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Public Hosted Zone and map to DNS in Route 53 service</li>
+<li>AWS Account with Programmatic Acesss and AdministratorAccess Policy included </li>
+<li>Access Key ID of AWS Account</li>
+<li>Secret Access Key Values of AWS Account</li>
+<li>AWS Public regions for deploy Openshift Cluster</li>
+<li>Pull secret from <a href="https://cloud.redhat.com" target="_blank">https://cloud.redhat.com</a><ul>
+<li>Evaluation subscription can be found at <a href="https://try.openshift.com" target="_blank">try.openshift.com</a></li>
+</ul>
+</li>
+<li>Internet Access during installation process</li>
+<li>Generating a Key Pair for cluster node with SSH Access</li>
+</ul>
+<p>Default CPU , memory and Disk sizing for Openshift node after finish deployment</p>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th style="text-align:center">vCPU</th>
+<th style="text-align:center">Mem(GiB)</th>
+<th style="text-align:center">Storage (GB)</th>
+<th style="text-align:center">IOPs</th>
+<th>AWS Instance Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master Node</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">120</td>
+<td style="text-align:center">3000</td>
+<td>m6i.xlarge / m5.xlarge</td>
+</tr>
+<tr>
+<td>Worker Node</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">120</td>
+<td style="text-align:center">3000</td>
+<td>m6i.large / m5.large</td>
+</tr>
+<tr>
+<td>Helper Node</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">100</td>
+<td>t3a.medium</td>
+</tr>
+</tbody>
+</table>
+<h2 id="preparation">Preparation</h2>
+<p>prepare the bastion server to install OpenShift Container Platform. This includes installing the AWS Command Line Interface , the OpenShift Installer , and the OpenShift CLI</p>
+<ul>
+<li><p>Connect to your administration host</p>
+<pre><code class="lang-bash">ssh &lt;user name&gt;@bastion.&lt;Domain Name&gt;
+</code></pre>
+</li>
+<li><p>Switch to <em>root</em> using the <em>sudo</em> command</p>
+<pre><code class="lang-bash">sudo -i
+</code></pre>
+</li>
+<li><p>Install the AWS CLI Tool</p>
+</li>
+</ul>
+<pre><code class="lang-bash">    curl &quot;https:/s3.amazonaws.com/aws-cli/awscli-bundle.zip&quot; -o &quot;awscli-bundle.zip&quot;
+    unzip awscli-bundle.zip
+    ./awscli-bundle/install -i /usr/local/aws -b /bin/aws
+    aws --version
+</code></pre>
+<ul>
+<li><p>Install OpenShift CLI Tools</p>
+<ul>
+<li>Download OpenShift Installer and OpenShift Client (oc) from <a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/" target="_blank">here</a></li>
+<li><p>Install OpenShift Installer </p>
+<pre><code>tar zxvf &lt;OpenShift-Installer&gt; -C /usr/bin
+chmod +x /usr/bin/openshift-install
+</code></pre></li>
+<li><p>Install OpenShift Client (oc)</p>
+<pre><code class="lang-bash">tar zxvf &lt;OpenShift Client&gt; -C /usr/bin
+chmod +x /usr/bin/oc
+</code></pre>
+</li>
+<li><p>Optional: setup bash completion</p>
+<pre><code class="lang-bash">openshift-install completion bash &gt;/etc/bash_completion.d/openshift-install
+oc completion bash &gt;/etc/bash_completion.d/openshift
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Set your AWS credentials to <strong>$HOME/.aws/credentials</strong> </p>
+</li>
+</ul>
+<h2 id="install-openshift">Install OpenShift</h2>
+<ul>
+<li><p>Get pull secret from <a href="https://cloud.redhat.com" target="_blank">cloud.redhat.com</a></p>
+<ul>
+<li><p>Login to <a href="https://cloud.redhat.com" target="_blank">cloud.redhat.com</a></p>
+<p><img src="images/Log_in_console.png" alt="log in console"></p>
+</li>
+<li><p>Navigate to OpenShift Menu-&gt;Create Cluster-&gt;Run it yourself-&gt;AWS (x86_64) on run it your self-&gt;Installer-provisioned-infrastructure</p>
+</li>
+<li><p>Copy pull secret</p>
+<p><img src="images/click_to_copy_pull_secret.png" alt="click to copy pull secret"></p>
+</li>
+<li><p>Save your pull secret for use later</p>
+</li>
+</ul>
+</li>
+<li><p>Create an SSH keypair to be used for your Openshift environement</p>
+<pre><code class="lang-bash"> ssh-keygen -f ~/.ssh/cluster-{Name}-key -N &apos;&apos;
+</code></pre>
+</li>
+<li><p>Run OpenShift Installer for interactive installation</p>
+<pre><code class="lang-bash">openshift-install create cluster --dir &lt;installation_directory&gt;
+</code></pre>
+</li>
+<li><p>Input your cluster configuration</p>
+<pre><code class="lang-bash">  ? SSH Public Key /home/&lt;user_name&gt;/.ssh/cluster-{Name}-key.pub
+  ? Platform aws
+  INFO Credentials loaded from the &quot;default&quot; profile in file &quot;/home/&lt;user_name&gt;/.aws/credentials&quot;
+  ? Region &lt;your AWS Region&gt;
+  ? Base Domain &lt;your AWS Domain&gt;
+  ? Cluster Name &lt;your AWS Cluster Name&gt;
+  ? Pull Secret [? for help] 
+  ***************************************************************************************************************************************************************
+</code></pre>
+<p>Sample output</p>
+<pre><code class="lang-log">  INFO Creating infrastructure resources...
+  INFO Waiting up to 20m0s for the Kubernetes API at https://api.cluster-e9eb.sandbox1409.opentlc.com:6443...
+  INFO API v1.19.0+e49167a up
+  INFO Waiting up to 30m0s for bootstrapping to complete...
+  INFO Destroying the bootstrap resources...
+  INFO Waiting up to 40m0s for the cluster at https://api.cluster-e9eb.sandbox1409.opentlc.com:6443 to initialize...
+  INFO Waiting up to 10m0s for the openshift-console route to be created...
+  INFO Install complete!
+  INFO To access the cluster as the system:admin user when using &apos;oc&apos;, run &apos;export KUBECONFIG=/home/wkulhane-redhat.com/cluster-e9eb/auth/kubeconfig&apos;
+  INFO Access the OpenShift web-console here: https://console-openshift-console.apps.cluster-e9eb.sandbox1409.opentlc.com
+  INFO Login to the console with user: kubeadmin, password: ***************
+  INFO Time elapsed: 32m6s
+</code></pre>
+</li>
+<li><p>set up the OpenShift CLI</p>
+<pre><code class="lang-bash">export KUBECONFIG=$HOME/cluster-{NAME}/auth/kubeconfig
+echo &quot;export KUBECONFIG=$HOME/cluster-{NAME}/auth/kubeconfig&quot; &gt;&gt;$HOME/.bashrc
+</code></pre>
+</li>
+<li><p>Validate your clusters</p>
+<ul>
+<li><p>Check that you are cluster administrator</p>
+<pre><code class="lang-bash">oc whoami
+</code></pre>
+<p>Output</p>
+<pre><code class="lang-bash">system:admin
+</code></pre>
+</li>
+<li><p>Validate that all nodes have a status of <strong>Ready</strong></p>
+<pre><code class="lang-bash">oc get nodes
+</code></pre>
+<p>Output</p>
+<pre><code class="lang-bash">NAME                                         STATUS   ROLES    AGE   VERSION
+ip-10-0-132-239.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+ip-10-0-147-206.us-east-2.compute.internal   Ready    worker   17m   v1.19.0+e49167a
+ip-10-0-169-195.us-east-2.compute.internal   Ready    worker   19m   v1.19.0+e49167a
+ip-10-0-184-201.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+ip-10-0-200-125.us-east-2.compute.internal   Ready    worker   19m   v1.19.0+e49167a
+ip-10-0-212-189.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- 9. Save your provided AWS credentials to the **$HOME/.aws/credentials** file, making sure to replace **YOURACCESSKEY** and **YOURSECRETACCESSKEY** with your individual credentials:
+
+> **`mkdir $HOME/.aws`**
+>
+> **`cat << EOF >> $HOME/.aws/credentials`**  
+> **`[default]`**  
+> **`access_key_id = {AWSKEY}`**  
+> **`aws_secret_access_key = {AWSSECRETKEY}`**  
+> **`region = {REGION}`**  
+> **`EOF`**  
+
+1.  Check to see that your credentials work:
+
+> **`aws sts get-caller-identity`**
+## Sample Output
+
+```
+{
+    "UserId": "AIDAXPZEZ6JLW2LZX2ZBT",
+    "Account": "514936402519",
+    "Arn": "arn:aws:iam::514936402519:user/wkulhane@redhat.com-e9eb"
+}
+
+``` -->
+<!-- 11. Log in with your Red Hat Login for Copy **Pull Secret** at https://cloud.redhat.com and click to `Log in to the console` :   
+| You need a Red Hat Subscription or Developer Account to access the Openshift page  
+
+![log in console](./images/Log_in_console.png)
+
+12. Click to the OpenShift Menu  
+
+![click to Openshift menu](./image/click_to_Openshift.png)  
+<br >
+13. Click to Create Cluster Button
+
+![click to create cluster](./image/click_create_cluster.png)  
+14. Click to `AWS (X86)` on **Run it yourself** section
+
+![click to AWS(x86_64)](./image/click_to_aws_x86_64.png)
+
+15. Click **Installer-provisioned-infrastructure**
+
+![click to Installer-provisioned infrastructure](./images/click_ipi.png)  
+<br >
+16. Find the Section **Pull Secret,** click `Copy Pull Secret` to place the secret in your clipboard, and then save it to a file
+
+![click to copy pull secret](./images/click_to_copy_pull_secret.png)
+
+<br>
+- You paste the pull secret into the prompt of the installer later. -->
+<!-- ```
+{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNmJjMzI0YWU5NGJkNDY3ZmI0ZWMyMGZlM2Q4M2QwMmU6SE42MFJPVEE0R1hDUDdTVjA2RlZWSDdVMkpKSEpDWkxZSEtDOU1ISlBBNTdPR0tRVkpKV0FYS0w3UzhaT0g4Nw==","email":"youremail@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNmJjMzI0YWU5NGJkNDY3ZmI0ZWMyMGZlM2Q4M2QwMmU6SE42MFJPVEE0R1hDUDdTVjA2RlZWSDdVMkpKSEpDWkxZSEtDOU1ISlBBNTdPR0tRVkpKV0FYS0w3UzhaT0g4Nw==","email":"youremail@redhat.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTk1ZTEyMmI3LTE4NDgtNDhkZi1iYTlhLTc3YmI5NTdhNGI5NjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTRaVGd5TkRJd05UazFOREkwTTJJM09UUTRNR00wWXpOaE1EbGhZalU0WlNKOS5mYm4yenVvck9KcDB0R3ZtVmZqdFliaWdlS0w5OHJVN1NTem1SYlBwZzBKaVdQUDBnSWYtUmhIX19sOE5GQ3VjRzU3SkNNcmJhaVBqRU05alRaS0RtdXFqdVI1UjhhQmVKNmw2bjA0czlNUWhMS01YNFRpdDg5ejV0YXpuTDRuOFRqX1I4b20xLW02cUg3RE1Ia2QzNk80UmZReTdQaWdBbzBFalU3T3pGZEtweEVqZW8xNTY2MmRQOWdJUm1RSTJVTUl6Zm85Sl9BS0FjR2s4dVIxZ2hnc3JoTGxHS1NXdlNQb2RUQVlMNGY5WEczOU9Sa2tpVWVhWmtjWGdaTTlZQ29KMzZ5dWNjeW8tVjJDT1JCYjZxRDhiMlNZakNfWHlBNVpGRGZNRUVkS2JDVWNZczBsNXcySkpJTkVacUhVSzdYNDh2dEVsaGRFd3JaakJsRjB2b29KMG5WU0k0OWJsU3YwVkhwQm5acVpoVFh4ejA5TGZYZWNpVnF5TS13aEhWNldCNmZLRTVFMFVjckZkaFlxYlFqOW1USFFtb0hQVDhUUndWUkNBQ3NjVFVKYmFNVzRzRGctRkxoWXdxM09qZG1iZE1oOGNFS0NKR05SOVJBWVZPci12MVc0amJicnhTYjNTaEtBTld4ZXBxQlNEaFNkWjVIV25FYzZ4bFhWYk9rVl9ueXIxcl9Zd1FGV0FuZjc5X1RXTFhCNlJ5VTFxWlpULWVUazhGZjEyTTF6d0lQSDlVN0llY1lHeWN5YXZ4NkJ6MVljOWlHcFRQOFZIeGpQQUx5S0dzSWRpZEpaX0Jxdk5jUFMybC1hWE14WnJSbU9YNkNuak9pNnlJcUZWN2czYW1OMXpqSTZBZFdBX3p5OUlsMmdkMHk4S2g3SHJMQW9KQTNUbTZQSQ==","email":"youremail@redhat.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTk1ZTEyMmI3LTE4NDgtNDhkZi1iYTlhLTc3YmI5NTdhNGI5NjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTRaVGd5TkRJd05UazFOREkwTTJJM09UUTRNR00wWXpOaE1EbGhZalU0WlNKOS5mYm4yenVvck9KcDB0R3ZtVmZqdFliaWdlS0w5OHJVN1NTem1SYlBwZzBKaVdQUDBnSWYtUmhIX19sOE5GQ3VjRzU3SkNNcmJhaVBqRU05alRaS0RtdXFqdVI1UjhhQmVKNmw2bjA0czlNUWhMS01YNFRpdDg5ejV0YXpuTDRuOFRqX1I4b20xLW02cUg3RE1Ia2QzNk80UmZReTdQaWdBbzBFalU3T3pGZEtweEVqZW8xNTY2MmRQOWdJUm1RSTJVTUl6Zm85Sl9BS0FjR2s4dVIxZ2hnc3JoTGxHS1NXdlNQb2RUQVlMNGY5WEczOU9Sa2tpVWVhWmtjWGdaTTlZQ29KMzZ5dWNjeW8tVjJDT1JCYjZxRDhiMlNZakNfWHlBNVpGRGZNRUVkS2JDVWNZczBsNXcySkpJTkVacUhVSzdYNDh2dEVsaGRFd3JaakJsRjB2b29KMG5WU0k0OWJsU3YwVkhwQm5acVpoVFh4ejA5TGZYZWNpVnF5TS13aEhWNldCNmZLRTVFMFVjckZkaFlxYlFqOW1USFFtb0hQVDhUUndWUkNBQ3NjVFVKYmFNVzRzRGctRkxoWXdxM09qZG1iZE1oOGNFS0NKR05SOVJBWVZPci12MVc0amJicnhTYjNTaEtBTld4ZXBxQlNEaFNkWjVIV25FYzZ4bFhWYk9rVl9ueXIxcl9Zd1FGV0FuZjc5X1RXTFhCNlJ5VTFxWlpULWVUazhGZjEyTTF6d0lQSDlVN0llY1lHeWN5YXZ4NkJ6MVljOWlHcFRQOFZIeGpQQUx5S0dzSWRpZEpaX0Jxdk5jUFMybC1hWE14WnJSbU9YNkNuak9pNnlJcUZWN2czYW1OMXpqSTZBZFdBX3p5OUlsMmdkMHk4S2g3SHJMQW9KQTNUbTZQSQ==","email":"youremail@redhat.com"}}}
+``` -->
+<!-- 17. Double check that your pull secret contains credentials for all three container registries: **quay.io , registry.connect.redhat.com,** and **registry.redhat.io** as well **cloud.openshift.com.**   -->
+<!-- 
+18. Create an SSH keypair to be used for your Openshift environement:
+>**`ssh-keygen -f ~/.ssh/cluster-{Name}-key -N '' `**   -->
+<!-- 19. Run the `Openshift-installer` and answer the prompts
+>**`openshift-install create cluster --dir <installation_directory> `**   -->
+<!-- ```
+? SSH Public Key /home/<user_name>/.ssh/cluster-{Name}-key.pub
+? Platform aws
+INFO Credentials loaded from the "default" profile in file "/home/<user_name>/.aws/credentials"
+? Region <your AWS Region>
+? Base Domain <your AWS Domain>
+? Cluster Name <your AWS Cluster Name>
+? Pull Secret [? for help] 
+***************************************************************************************************************************************************************
+
+```  -->
+<!-- ## Sample Output
+
+``` 
+INFO Creating infrastructure resources...
+INFO Waiting up to 20m0s for the Kubernetes API at https://api.cluster-e9eb.sandbox1409.opentlc.com:6443...
+INFO API v1.19.0+e49167a up
+INFO Waiting up to 30m0s for bootstrapping to complete...
+INFO Destroying the bootstrap resources...
+INFO Waiting up to 40m0s for the cluster at https://api.cluster-e9eb.sandbox1409.opentlc.com:6443 to initialize...
+INFO Waiting up to 10m0s for the openshift-console route to be created...
+INFO Install complete!
+INFO To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/home/wkulhane-redhat.com/cluster-e9eb/auth/kubeconfig'
+INFO Access the OpenShift web-console here: https://console-openshift-console.apps.cluster-e9eb.sandbox1409.opentlc.com
+INFO Login to the console with user: kubeadmin, password: IbN6W-j3J6I-wLWUq-h6r8o
+INFO Time elapsed: 32m6s
+
+```  -->
+<!-- > **Note:** the following items from the output of the install command  
+- The location of the **kubeconfig** file, which is required for setting the KUBECONFIG environment variable and, as suggested, sets the Openshfit user ID to **system:admin**.
+- the **kubeadmin** user ID and associated password (**GEveR-tBVTB-jJUJB-iC9Jn** in the example).  
+    - the password for the **kubeadmin** user is also written into the **auth/kubeadmin-password** file.
+- The URL of the webconsole (**https://console-openshift-console.apps.cluster-<GUID>.sandboxNNNN.opentlc.com** in the example) and the credentials(again) to log into the web console.
+<br>
+<br>
+
+
+20. set up the CLI
+
+>`export KUBECONFIG=$HOME/cluster-{NAME}/auth/kubeconfig`
+>`echo "export KUBECONFIG=$HOME/cluster-{NAME}/auth/kubeconfig" >>$HOME/.bashrc`  
+- This makes youi **system:admin** on the cluster. -->
+<!-- 21. Validate that you are in fact the cluster administrator
+>`oc whoami`
+
+```
+system:admin
+``` -->
+<!-- 22. Validate that all nodes have a status of **Ready**:
+>`oc get nodes`
+
+```
+NAME                                         STATUS   ROLES    AGE   VERSION
+ip-10-0-132-239.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+ip-10-0-147-206.us-east-2.compute.internal   Ready    worker   17m   v1.19.0+e49167a
+ip-10-0-169-195.us-east-2.compute.internal   Ready    worker   19m   v1.19.0+e49167a
+ip-10-0-184-201.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+ip-10-0-200-125.us-east-2.compute.internal   Ready    worker   19m   v1.19.0+e49167a
+ip-10-0-212-189.us-east-2.compute.internal   Ready    master   24m   v1.19.0+e49167a
+
+```
+
+23. Validate that all of the pods are running, and that none of them is in **Error** or **CrashLoopBackoff** states:
+
+>`oc get pod -A`
+
+```
+NAMESPACE                                NAME                                            READY   STATUS      RESTARTS   AGE
+openshift-apiserver-operator             openshift-apiserver-operator-7f87667d89-hfstg   1/1     Running     1          23m
+openshift-apiserver                      apiserver-5d6dbc5bf6-4nkjn                      1/1     Running     0          12m
+openshift-apiserver                      apiserver-5d6dbc5bf6-4v47v                      1/1     Running     0          11m
+openshift-apiserver                      apiserver-5d6dbc5bf6-cphk2                      1/1     Running     0          11m
+openshift-authentication-operator        authentication-operator-559d87b6-9j86h          1/1     Running     1          22m
+openshift-authentication                 oauth-openshift-5947c7bdbc-8t54v                1/1     Running     0          11m
+openshift-authentication                 oauth-openshift-5947c7bdbc-9kt5d                1/1     Running     0          11m
+openshift-cloud-credential-operator      cloud-credential-operator-58d66f676f-pg8nf      1/1     Running     1          23m
+openshift-cluster-machine-approver       machine-approver-68cd7c876d-7hr5x               2/2     Running     0          22m
+
+[...]
+
+openshift-sdn                            sdn-npstq                                       2/2     Running     0          19m
+openshift-service-ca-operator            service-ca-operator-84d747f74-5blzw             1/1     Running     1          29m
+openshift-service-ca                     service-ca-f766bdf44-tss7t                      1/1     Running     0          23m
+
+``` -->
+<h2 id="openshift-architecture">OpenShift Architecture</h2>
+<p><img src="images/Architecture.PNG" alt="OpenShift Architecture"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="vSphere.html" class="navigation navigation-next navigation-unique" aria-label="Next page: vSphere">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"AWS","level":"1.2.1","depth":2,"next":{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]},"previous":{"title":"OpenShift IPI","level":"1.2","depth":1,"ref":"","articles":[{"title":"AWS","level":"1.2.1","depth":2,"path":"AWS.md","ref":"AWS.md","articles":[]},{"title":"vSphere","level":"1.2.2","depth":2,"path":"vSphere.md","ref":"vSphere.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","copy-code-button","mermaid-gb3"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"mermaid-newface":{"theme":"neutral"},"search-plus":{},"copy-code-button":{},"mermaid-gb3":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Red Hat Thailand SA","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"OpenShift IPI","gitbook":"3.2.3"},"file":{"path":"AWS.md","mtime":"2022-03-23T03:53:45.458Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-23T03:54:22.359Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-mermaid-gb3/book/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    <script src="gitbook/gitbook-plugin-mermaid-gb3/mermaid/mermaid.min.js"></script>
+
+    </body>
+</html>
+
