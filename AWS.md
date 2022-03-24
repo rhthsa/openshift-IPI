@@ -20,10 +20,10 @@
 
 Default CPU , memory and Disk sizing for Openshift node after finish deployment
 
-| Node Type   | vCPU | Mem(GiB) | Storage (GB) | IOPS|
-|-------------|:------:|:----------:|:--------------:|:------:|
-|Control Plane | 4    | 16       | 100          | 300
-|Compute | 2    | 8        | 100          |300 
+| Node Type   | vCPU | Mem(GiB) | Storage (GB) |
+|-------------|:------:|:----------:|:--------------:|
+|Control Plane | 4    | 16       | 100          | 
+|Compute | 2    | 8        | 100          |
 
 
 
